@@ -65,7 +65,7 @@ function Header() {
 
   return (
     <header className="header">
-      <h1 style={style}>Fast React Pizza Co.</h1>
+      <h1 style={style}>Fast Pizza Co.</h1>
     </header>
   );
 }
@@ -120,7 +120,9 @@ function Pizza({ pizzaObj }) {
         ) : (
           <span>{pizzaObj.price}</span>
         )} for reference*/}
-        <span>{pizzaObj.soldOut ? "SOLD OUT" : pizzaObj.price}</span>
+        <span>
+          {pizzaObj.soldOut ? "SOLD OUT" : `$${pizzaObj.price.toFixed(2)}`}
+        </span>
       </div>
     </li>
   );
