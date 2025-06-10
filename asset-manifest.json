@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/TinaLee-prog/PizzaMenu/static/css/main.c6bf8b93.css",
+    "main.js": "/TinaLee-prog/PizzaMenu/static/js/main.1f5105b8.js",
+    "static/js/453.43eb35b1.chunk.js": "/TinaLee-prog/PizzaMenu/static/js/453.43eb35b1.chunk.js",
+    "index.html": "/TinaLee-prog/PizzaMenu/index.html",
+    "main.c6bf8b93.css.map": "/TinaLee-prog/PizzaMenu/static/css/main.c6bf8b93.css.map",
+    "main.1f5105b8.js.map": "/TinaLee-prog/PizzaMenu/static/js/main.1f5105b8.js.map",
+    "453.43eb35b1.chunk.js.map": "/TinaLee-prog/PizzaMenu/static/js/453.43eb35b1.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c6bf8b93.css",
+    "static/js/main.1f5105b8.js"
+  ]
+}
