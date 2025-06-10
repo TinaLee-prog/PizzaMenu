@@ -50,10 +50,12 @@ const pizzaData = [
 ];
 
 function App() {
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem("theme") || "light";
-  });
-  //const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("light");
+  const openHour = 15;
+  const closeHour = 22;
+  // const [theme, setTheme] = React.useState(
+  //   () => localStorage.getItem("theme") || "light"
+  // );
 
   React.useEffect(() => {
     localStorage.setItem("theme", theme);
@@ -63,12 +65,14 @@ function App() {
     <div className={`container ${theme}`}>
       <Header theme={theme} setTheme={setTheme} />
       <Menu />
-      <Footer />
+      <Footer openHour={openHour} closeHour={closeHour} />
     </div>
   );
 }
 
 function Header({ theme, setTheme }) {
+  //const style = { color: "red", fontSize: "48px", textTransform: "uppercase" };
+
   const style = {};
 
   return (
@@ -99,12 +103,19 @@ function Menu() {
           <ul className="pizzas">
             {pizzas.map((pizza) => (
               <Pizza pizzaObj={pizza} key={pizza.name} />
+              //<Pizza name={pizza.name} photoName={pizza.photoName} />
             ))}
           </ul>
         </>
       ) : (
         <p>We're still working on our menu. Please come back later :)</p>
       )}
+      {/* <ul className="pizzas">
+        {pizzaData.map((pizza) => (
+          <Pizza pizzaObj={pizza} key={pizza.name} />
+          //<Pizza name={pizza.name} photoName={pizza.photoName} />
+        ))}
+      </ul> */}
     </main>
   );
 }
@@ -119,13 +130,14 @@ function Pizza({ pizzaObj }) {
       <div>
         <h3>{pizzaObj.name}</h3>
         <p>{pizzaObj.ingredients}</p>
+        {/* {pizzaObj.soldOut ? (
+          <span>SOLD OUT</span>
+        ) : (
+          <span>{pizzaObj.price}</span>
+        )} for reference*/}
         <span>
           {pizzaObj.soldOut ? "SOLD OUT" : `$${pizzaObj.price.toFixed(2)}`}
         </span>
-        <div className="addCart-btn">
-          {/* <input type="number" min="1" max="10"></input> */}
-          {/* <button>Add To Cart</button> */}
-        </div>
       </div>
     </li>
   );
@@ -134,10 +146,21 @@ function Pizza({ pizzaObj }) {
 function Footer(props) {
   console.log(props);
   const hour = new Date().getHours();
-  const openHour = 16;
-  const closeHour = 21;
+  const openHour = 15;
+  const closeHour = 22;
   const isOpen = hour >= openHour && hour <= closeHour;
   console.log(isOpen);
+
+  //console.log(hour, isOpen);
+  // if (hour >= openHour && hour <= closeHour) alert("We're currently open!");
+  // else alert("Sorry we're closed");
+
+  if (!isOpen)
+    return (
+      <p>
+        We're happy to welcome you between {openHour}:00 and {closeHour}:00.
+      </p>
+    );
 
   return (
     <footer className="footer">
@@ -145,20 +168,20 @@ function Footer(props) {
         <Order closeHour={closeHour} openHour={openHour} /> //??
       ) : (
         <p>
-          CLOSED. We're happy to welcome you between {openHour}:00 and{" "}
-          {closeHour}:00.
+          We're happy to welcome you between {openHour}:00 and {closeHour}:00.
         </p>
       )}
     </footer>
   );
+  //return React.createElement('footer', null, "We're currently open!")
 }
 
 function Order({ closeHour, openHour }) {
   return (
     <div className="order">
       <p>
-        <strong>We're currently open</strong> from {openHour}:00 to {closeHour}
-        :00. Come visit us or order online!
+        We're currently open from {openHour}:00 to {closeHour}:00. Come visit us
+        or order online!
       </p>
       <button className="btn">Order Now 🛒</button>
     </div>
@@ -173,4 +196,7 @@ root.render(
   </React.StrictMode>
 );
 
-reportWebVitals(); //Web Vitals
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals(); //Web Vitals（效能追蹤，選用）
